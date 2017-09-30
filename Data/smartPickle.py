@@ -49,6 +49,7 @@ class pickleHandle:
                 return [], -1
             except:
                 self.createBatch()
+                f = []
         finally:
             del f
             f = open(self.dir + self.name + "_" + str(offset + nxt) + self.ext, "rb")
