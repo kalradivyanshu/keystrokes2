@@ -27,5 +27,5 @@ while num != -1:
     if not os.path.exists("./SamplesBatch"):
         os.makedirs("./SamplesBatch")
     pickle.dump(sampleBatch, open("./SamplesBatch/sampleSignals_" + str(num) + ".pickle", "wb"))
-    batch, num = pHan.getBatch(batch, num)
+    batch, num = pHan.getBatch(num)
 dataDump = {}
