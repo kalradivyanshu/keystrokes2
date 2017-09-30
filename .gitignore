@@ -1,0 +1,4 @@
+Data/*.pickle
+__pycache__
+Data/smartData
+Data/SamplesBatch
