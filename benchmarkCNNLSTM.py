@@ -54,6 +54,7 @@ model.compile(optimizer=adam, loss='categorical_crossentropy', metrics=['accurac
 try:
     for i in range(epochs):
         while num != -1:
+            print(i, "epoch ", num)
             model.fit([batch.x], batch.y, batch_size = batch_size, validation_split = 0.4, epochs = 1)
             batch, num = ph.getBatch(num)
 except:
