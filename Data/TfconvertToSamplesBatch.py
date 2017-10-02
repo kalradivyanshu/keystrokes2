@@ -34,7 +34,7 @@ while num != -1:
     print(j/20400, "%              ", end = "\r")
     j += batch.x.shape[0]
     samples = model.predict(batch.x)
-    print(samples.shape)
+    #print(samples.shape)
     y = batch.y
     samBat = smartBatch(samples, y, num)
     if not os.path.exists("./KeystrokeSigWindowedBatches"):
