@@ -8,13 +8,17 @@ from keras.callbacks import ModelCheckpoint
 from keras.optimizers import Adam
 from smartPickle import pickleHandle, smartBatch
 import numpy as np
-
+import sys
 dataDir = "./Data/"
 ph = pickleHandle(500, "", dataDir + "equalDimsKeySigs/", "keyStrokeSigEqualDims", ".pickle", "")
 batch, num = ph.getBatch(0)
 #print(batch.x.shape)
-#raise MemoryError
-slidingWindow_module = tf.load_op_library('./windowing_out.so')
+#raise MemoryErrortry:
+try:
+    os = "_"+sys.argv[1]
+except:
+    os = ""
+slidingWindow_module = tf.load_op_library("./windowing_out"+os+".so")
 tf.SlidingWindow = slidingWindow_module.sliding_window
 """
 **** HYPERPARAMETERS ****

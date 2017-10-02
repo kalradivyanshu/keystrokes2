@@ -7,12 +7,17 @@ from smartPickle import pickleHandle, smartBatch
 import numpy as np
 import pickle
 import os
+import sys
 
 dataDir = "./"
 ph = pickleHandle(250, "", dataDir + "equalDimsKeySigs/", "keyStrokeSigEqualDims", ".pickle", "")
 batch, num = ph.getBatch(0)
 
-slidingWindow_module = tf.load_op_library('./windowing_out.so')
+try:
+    os = "_"+sys.argv[1]
+except:
+    os = ""
+slidingWindow_module = tf.load_op_library("./windowing_out"+os+".so")
 tf.SlidingWindow = slidingWindow_module.sliding_window
 
 def windowLayer_cc(inp):
