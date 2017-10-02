@@ -11,13 +11,12 @@ sys.path.insert(0, './Data/')
 from smartPickle import pickleHandle, smartBatch
 import numpy as np
 
-Conv1D = keras.layers.convolutional.Conv1D
 dataDir = "./Data/"
 ph = pickleHandle(250, "", dataDir + "KeystrokeSigWindowedBatches/", "finalIn", ".pickle", "_")
 batch, num = ph.getBatch(0)
 #print(batch.x.shape)
 #raise MemoryError
-
+Conv1D = keras.layers.convolutional.Conv1D
 """
 **** HYPERPARAMETERS ****
 """
@@ -38,11 +37,11 @@ batch_size = 128
 adam = Adam(alpha)
 windowed = Input((9901, 100,))
 convolutedSig = Conv1D(cnn1, 100, activation = cnnAct)
-convolutedSig2 = Conv1D(cnn2, cnn1, activation = cnnAct)
+#convolutedSig2 = Conv1D(cnn2, cnn1, activation = cnnAct)
 cnn1Out = convolutedSig(windowed)
-cnn2Out = convolutedSig(cnn1Out)
+#cnn2Out = convolutedSig(cnn1Out)
 #1511x9901x30
-lstmOutput = LSTM(lstmOutputDim)(cnn2Out)
+lstmOutput = LSTM(lstmOutputDim)(cnn1Out)
 fullyConnected = Sequential()
 fullyConnected.add(Dense(fc[0], input_dim = lstmOutputDim, activation = fcAct))
 fullyConnected.add(Dense(fc[1], activation = fcAct))
