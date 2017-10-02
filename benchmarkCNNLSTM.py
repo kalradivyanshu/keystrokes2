@@ -36,11 +36,13 @@ batch_size = 128
 """
 
 adam = Adam(alpha)
-windowed = Input((100, 9901,))
+windowed = Input((9901, 100,))
 convolutedSig = Conv1D(cnn1, 100, activation = cnnAct)
+convolutedSig2 = Conv1D(cnn2, cnn1, activation = cnnAct)
 cnn1Out = convolutedSig(windowed)
+cnn2Out = convolutedSig(cnn1Out)
 #1511x9901x30
-lstmOutput = LSTM(lstmOutputDim)(cnn1Out)
+lstmOutput = LSTM(lstmOutputDim)(cnn2Out)
 fullyConnected = Sequential()
 fullyConnected.add(Dense(fc[0], input_dim = lstmOutputDim, activation = fcAct))
 fullyConnected.add(Dense(fc[1], activation = fcAct))
