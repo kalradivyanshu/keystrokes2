@@ -55,7 +55,9 @@ try:
             print(i, "epoch ", num)
             model.fit([batch.x], batch.y, batch_size = batch_size, validation_split = 0.4, epochs = 1)
             batch, num = ph.getBatch(num)
-except:
-    pass
+except Exception as ex:
+    s = str(ex)
+    e = sys.exc_info()[0]
+    print(e, s)
 finally:
     model.save_weights('cnnlstmKeystrokes.h5')
