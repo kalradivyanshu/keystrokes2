@@ -1,5 +1,4 @@
 import tensorflow as tf
-from skimage.util.shape import view_as_windows
 from keras.models import Sequential, Model
 import keras.layers
 from keras.layers import Input, Dense, concatenate, Dropout, add, Lambda

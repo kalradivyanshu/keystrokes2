@@ -2,7 +2,6 @@ import sys
 sys.path.insert(0, './Data/')
 
 import tensorflow as tf
-from skimage.util.shape import view_as_windows
 from keras.models import Sequential, Model
 from keras.layers import Input, Dense, concatenate, Dropout, add, Lambda
 from keras.callbacks import ModelCheckpoint
