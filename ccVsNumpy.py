@@ -15,10 +15,10 @@ batch, num = ph.getBatch(0)
 #print(batch.x.shape)
 #raise MemoryErrortry:
 try:
-    os = "_"+sys.argv[1]
+    osName = "_"+sys.argv[1]
 except:
-    os = ""
-slidingWindow_module = tf.load_op_library("./windowing_out"+os+".so")
+    osName = ""
+slidingWindow_module = tf.load_op_library("./windowing_out"+osName+".so")
 tf.SlidingWindow = slidingWindow_module.sliding_window
 """
 **** HYPERPARAMETERS ****

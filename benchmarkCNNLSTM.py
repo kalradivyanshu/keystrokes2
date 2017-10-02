@@ -17,8 +17,6 @@ ph = pickleHandle(250, "", dataDir + "KeystrokeSigWindowedBatches/", "finalIn", 
 batch, num = ph.getBatch(0)
 #print(batch.x.shape)
 #raise MemoryError
-slidingWindow_module = tf.load_op_library('./windowing_out.so')
-tf.SlidingWindow = slidingWindow_module.sliding_window
 
 """
 **** HYPERPARAMETERS ****
