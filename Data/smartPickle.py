@@ -11,12 +11,13 @@ class smartBatch:
 
 class pickleHandle:
 
-    def __init__(self, batchSize = 500):
-        self.pickleFile = "./keyStrokeSig.pickle";
-        self.dir = "./smartData/"
-        self.name = "keyStrokeSig"
-        self.ext = ".smartPickle"
+    def __init__(self, batchSize = 500, pickleFile = "./keyStrokeSig.pickle", dirPh = "./smartData/", name = "keyStrokeSig", ext = ".smartPickle", separator = "_"):
+        self.pickleFile = pickleFile
+        self.dir = dirPh
+        self.name = name
+        self.ext = ext
         self.batchSize = batchSize
+        self.separator = separator
 
     def createBatch(self):
         print("Loading Data...")
@@ -34,7 +35,7 @@ class pickleHandle:
             bat = smartBatch(batch_x, batch_y, j)
             if not os.path.exists(self.dir):
                 os.makedirs(self.dir)
-            pickle.dump(bat, open(self.dir + self.name + "_" + str(j) + self.ext, "wb"))
+            pickle.dump(bat, open(self.dir + self.name + self.separator + str(j) + self.ext, "wb"))
             j += 1
             i = i + self.batchSize
         del dataDump
@@ -42,15 +43,21 @@ class pickleHandle:
 
     def getBatch(self, offset = 0, nxt = +1):
         try:
-            f = open(self.dir + self.name + "_" + str(offset + nxt) + self.ext, "rb")
+            f = open(self.dir + self.name + self.separator + str(offset + nxt) + self.ext, "rb")
         except:
             try:
-                f = open(self.dir + self.name + "_" + "1" + self.ext, "rb")
+                f = open(self.dir + self.name + self.separator + "1" + self.ext, "rb")
+                f = None
                 return [], -1
             except:
                 self.createBatch()
                 f = []
         finally:
-            del f
-            f = open(self.dir + self.name + "_" + str(offset + nxt) + self.ext, "rb")
+            try:
+                if f == None:
+                    return [], -1
+                del f
+            except:
+                pass
+            f = open(self.dir + self.name + self.separator + str(offset + nxt) + self.ext, "rb")
         return pickle.load(f), offset + nxt

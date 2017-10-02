@@ -23,6 +23,7 @@ for d in data:
             for j in range(start, last):
                 sig[j] += signal[i + 1]
     sig += [0]*(len(sig)%100)
+    #print(sig.shape)
     xSig.append(sig)
     k += 1
 xSig = np.array(xSig)

@@ -2,3 +2,5 @@ Data/*.pickle
 __pycache__
 Data/smartData
 Data/SamplesBatch
+Data/equalDimsKeySigs
+Data/KeystrokeSigWindowedBatches
