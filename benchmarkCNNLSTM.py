@@ -46,7 +46,7 @@ fullyConnected.add(Dense(fc[0], input_dim = lstmOutputDim, activation = fcAct))
 fullyConnected.add(Dense(fc[1], activation = fcAct))
 fullyConnected.add(Dense(51, activation = 'softmax'))
 output = fullyConnected(lstmOutput)
-model = Model([inputSig], output)
+model = Model([windowed], output)
 model.compile(optimizer=adam, loss='categorical_crossentropy', metrics=['accuracy'])
 
 try:
